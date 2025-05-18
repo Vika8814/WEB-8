@@ -41,6 +41,21 @@
     color: #777;
   }
   
+  .bookButton {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #bb37cf;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    text-align: center;
+  }
+  
+  .bookButton:hover {
+    background-color: #9b00b3;
+  }
+  
   @media (max-width: 600px) {
     .card {
       width: 100%;

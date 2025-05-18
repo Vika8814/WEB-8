@@ -1,5 +1,6 @@
 // src/components/MovieCard.jsx
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from '../styles/MovieCard.module.css';
 
 const MovieCard = ({ movie }) => {
@@ -11,6 +12,9 @@ const MovieCard = ({ movie }) => {
         <p className={styles.description}>{movie.description}</p>
         <p className={styles.genre}>Жанр: {movie.genre}</p>
         <p className={styles.showtime}>Сеанс: {movie.showtime}</p>
+        <Link to={`/booking/${movie.id}`} className={styles.bookButton}>
+          Забронювати
+        </Link>
       </div>
     </div>
   );

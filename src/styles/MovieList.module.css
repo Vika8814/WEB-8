@@ -1,0 +1,27 @@
+/* src/styles/MovieList.module.css */
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .searchInput {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .movieGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  @media (max-width: 600px) {
+    .movieGrid {
+      grid-template-columns: 1fr;
+    }
+  }

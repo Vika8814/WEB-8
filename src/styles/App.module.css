@@ -1,0 +1,9 @@
+/* src/styles/App.module.css */
+.app {
+    text-align: center;
+  }
+  
+  .title {
+    padding: 20px;
+    font-size: 2rem;
+  }

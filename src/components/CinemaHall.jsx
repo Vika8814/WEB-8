@@ -1,20 +1,27 @@
 // src/components/CinemaHall.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { getBookedSeats } from '../services/BookingService';
 import styles from '../styles/CinemaHall.module.css';
 
-const CinemaHall = ({ onSelectSeats }) => {
+const CinemaHall = ({ movieId, onSelectSeats }) => {
   const rows = 5;
   const seatsPerRow = 10;
   const [selectedSeats, setSelectedSeats] = useState([]);
+  const [bookedSeats, setBookedSeats] = useState([]);
+
+  useEffect(() => {
+    setBookedSeats(getBookedSeats(movieId));
+  }, [movieId]);
 
   const handleSeatClick = (row, seat) => {
     const seatId = `${row}-${seat}`;
+    if (bookedSeats.includes(seatId)) return;
     if (selectedSeats.includes(seatId)) {
       setSelectedSeats(selectedSeats.filter((id) => id !== seatId));
     } else {
       setSelectedSeats([...selectedSeats, seatId]);
     }
-    onSelectSeats(selectedSeats);
+    onSelectSeats([...selectedSeats, seatId]);
   };
 
   const renderSeats = () => {
@@ -27,7 +34,11 @@ const CinemaHall = ({ onSelectSeats }) => {
           <div
             key={seatId}
             className={`${styles.seat} ${
-              selectedSeats.includes(seatId) ? styles.selected : styles.available
+              bookedSeats.includes(seatId)
+                ? styles.booked
+                : selectedSeats.includes(seatId)
+                ? styles.selected
+                : styles.available
             }`}
             onClick={() => handleSeatClick(row, seat)}
           >

@@ -30,6 +30,11 @@
     background-color: #007bff;
   }
   
+  .booked {
+    background-color: #dc3545;
+    cursor: not-allowed;
+  }
+  
   .seatsContainer {
     margin-top: 20px;
   }

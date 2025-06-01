@@ -22,6 +22,10 @@ export const movies = [
       description: "Команда дослідників подорожує крізь червоточину в пошуках нового дому для людства.",
       genre: "Sci-Fi",
       poster: require('../card/interstellar.jpg'),
-      showtime: "2025-05-20 19:00",
+      showtimes: [
+        { date: "2025-05-20", time: "18:00" },
+        { date: "2025-05-20", time: "21:00" },
+        { date: "2025-05-21", time: "19:00" },
+      ],
     },
   ];

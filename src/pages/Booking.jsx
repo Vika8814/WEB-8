@@ -1,9 +1,9 @@
-// src/pages/Booking.jsx
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CinemaHall from '../components/CinemaHall';
+import PaymentModal from '../components/PaymentModal';
 import { movies } from '../data/movies';
 import { saveBooking } from '../services/BookingService';
 import styles from '../styles/Booking.module.css';
@@ -18,6 +18,8 @@ const Booking = () => {
     email: '',
   });
   const [errors, setErrors] = useState({});
+  const [showPayment, setShowPayment] = useState(false);
+  const [lastBooking, setLastBooking] = useState(null);
 
   if (!movie) {
     return <p>Фільм не знайдено</p>;
@@ -47,10 +49,12 @@ const Booking = () => {
       return;
     }
     saveBooking(id, selectedSeats, userData);
+    setLastBooking({ movieId: id, seats: selectedSeats, userData });
     toast.success('Бронювання успішно збережено!');
     setSelectedSeats([]);
     setUserData({ name: '', phone: '', email: '' });
     setErrors({});
+    setShowPayment(true);
   };
 
   const handleInputChange = (e) => {
@@ -61,8 +65,8 @@ const Booking = () => {
 
   return (
     <div className={styles.booking}>
-      <h2>{movie.title}</h2>
-      <p>Сеанс: {movie.showtime}</p>
+      <h2 className={styles.title}>{movie.title}</h2>
+      <p className={styles.showtime}>Сеанс: {movie.showtime || 'Немає сеансів'}</p>
       <CinemaHall movieId={id} onSelectSeats={setSelectedSeats} />
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.formGroup}>
@@ -73,6 +77,7 @@ const Booking = () => {
             value={userData.name}
             onChange={handleInputChange}
             className={errors.name ? styles.error : ''}
+            placeholder="Введіть ваше ім'я"
           />
           {errors.name && <p className={styles.errorText}>{errors.name}</p>}
         </div>
@@ -84,6 +89,7 @@ const Booking = () => {
             value={userData.phone}
             onChange={handleInputChange}
             className={errors.phone ? styles.error : ''}
+            placeholder="Введіть ваш телефон"
           />
           {errors.phone && <p className={styles.errorText}>{errors.phone}</p>}
         </div>
@@ -95,6 +101,7 @@ const Booking = () => {
             value={userData.email}
             onChange={handleInputChange}
             className={errors.email ? styles.error : ''}
+            placeholder="Введіть ваш email"
           />
           {errors.email && <p className={styles.errorText}>{errors.email}</p>}
         </div>
@@ -103,6 +110,13 @@ const Booking = () => {
         </button>
       </form>
       <ToastContainer />
+      {showPayment && lastBooking && (
+        <PaymentModal
+          booking={lastBooking}
+          onClose={() => setShowPayment(false)}
+          movieTitle={movie.title}
+        />
+      )}
     </div>
   );
 };

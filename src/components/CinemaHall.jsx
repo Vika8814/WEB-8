@@ -1,4 +1,3 @@
-// src/components/CinemaHall.jsx
 import React, { useState, useEffect } from 'react';
 import { getBookedSeats } from '../services/BookingService';
 import styles from '../styles/CinemaHall.module.css';
@@ -16,12 +15,14 @@ const CinemaHall = ({ movieId, onSelectSeats }) => {
   const handleSeatClick = (row, seat) => {
     const seatId = `${row}-${seat}`;
     if (bookedSeats.includes(seatId)) return;
+    let updatedSeats;
     if (selectedSeats.includes(seatId)) {
-      setSelectedSeats(selectedSeats.filter((id) => id !== seatId));
+      updatedSeats = selectedSeats.filter((id) => id !== seatId);
     } else {
-      setSelectedSeats([...selectedSeats, seatId]);
+      updatedSeats = [...selectedSeats, seatId];
     }
-    onSelectSeats([...selectedSeats, seatId]);
+    setSelectedSeats(updatedSeats);
+    onSelectSeats(updatedSeats);
   };
 
   const renderSeats = () => {
@@ -58,8 +59,23 @@ const CinemaHall = ({ movieId, onSelectSeats }) => {
   return (
     <div className={styles.cinemaHall}>
       <h2>Вибір місць</h2>
+      <div className={styles.screen}>Екран</div>
       <div className={styles.seatsContainer}>{renderSeats()}</div>
-      <p>
+      <div className={styles.legend}>
+        <div className={styles.legendItem}>
+          <div className={`${styles.legendBox} ${styles.available}`}></div>
+          Доступні
+        </div>
+        <div className={styles.legendItem}>
+          <div className={`${styles.legendBox} ${styles.selected}`}></div>
+          Вибрані
+        </div>
+        <div className={styles.legendItem}>
+          <div className={`${styles.legendBox} ${styles.booked}`}></div>
+          Заброньовані
+        </div>
+      </div>
+      <p className={styles.selectedSeats}>
         Вибрані місця: {selectedSeats.length > 0 ? selectedSeats.join(', ') : 'Немає'}
       </p>
     </div>

@@ -4,6 +4,28 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #ffffff; /* Світлий фон для контрасту */
+  color: #333;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Темна тема (опціонально, активується через клас) */
+body.dark-theme {
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+}
+
+h1, h2, h3 {
+  font-weight: 600;
+}
+
+button, a {
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+button:hover, a:hover {
+  transform: translateY(-2px);
 }

@@ -1,9 +1,32 @@
-/* src/styles/App.module.css */
 .app {
-    text-align: center;
+    min-height: 100vh;
+    background: #ffffff;
+    font-family: Arial, sans-serif;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
   .title {
-    padding: 20px;
-    font-size: 2rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .bookingsButton {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  .bookingsButton:hover {
+    transform: scale(1.2);
   }

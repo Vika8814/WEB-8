@@ -16,6 +16,8 @@ const Booking = () => {
     name: '',
     phone: '',
     email: '',
+    naame: '',
+
   });
   const [errors, setErrors] = useState({});
   const [showPayment, setShowPayment] = useState(false);
